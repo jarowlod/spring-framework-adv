@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JpaPaymentRepositoryAdapter implements PaymentRepository {
 
-    private final JpaPaymentRepository paymentRepository;
+    private final JpaPaymentPaymentRepository paymentRepository;
     private final JpaPaymentPersistenceMapper mapper;
 
     @Override

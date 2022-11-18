@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.math.BigDecimal;
 
-public interface JpaPaymentRepository extends JpaRepository<PaymentEntity, String> {
+public interface JpaPaymentPaymentRepository extends JpaRepository<PaymentEntity, String> {
 
     Page<PaymentEntity> getByStatus(String status, Pageable pageable);
 
