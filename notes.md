@@ -1,2 +1,0 @@
-- przygotuj beana PaymentReporter, który wyświetli na konsoli ilość zrealizowanych płatności oraz ich całkowitą kwotę
-- dodać aspekt realizujący cache dla metody PaymentProcessor.getById() (implementacja oparta o mapę)
