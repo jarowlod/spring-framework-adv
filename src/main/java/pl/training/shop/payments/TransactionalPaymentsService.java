@@ -8,9 +8,9 @@ import pl.training.shop.payments.domain.PaymentDomain;
 import pl.training.shop.payments.domain.PaymentRequestDomain;
 import pl.training.shop.payments.ports.PaymentService;
 
-//@Primary
-//@Transactional
-//@Component
+@Primary
+@Transactional
+@Component
 @RequiredArgsConstructor
 public class TransactionalPaymentsService implements PaymentService {
 

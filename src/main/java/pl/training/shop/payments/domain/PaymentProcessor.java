@@ -3,13 +3,10 @@ package pl.training.shop.payments.domain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.javamoney.moneta.Money;
-import pl.training.shop.commons.aop.Atomic;
-import pl.training.shop.commons.aop.MinLength;
 import pl.training.shop.payments.ports.PaymentRepository;
 import pl.training.shop.payments.ports.PaymentService;
 import pl.training.shop.payments.ports.TimeProvider;
 
-@Atomic
 @Log
 @RequiredArgsConstructor
 public class PaymentProcessor implements PaymentService {
@@ -41,7 +38,7 @@ public class PaymentProcessor implements PaymentService {
     }
 
     @Override
-    public PaymentDomain getById(@MinLength String id) {
+    public PaymentDomain getById(String id) {
         return paymentsRepository.getById(id)
                 .orElseThrow(PaymentNotFoundException::new);
     }
