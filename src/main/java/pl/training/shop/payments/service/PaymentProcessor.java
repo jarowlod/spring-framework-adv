@@ -5,8 +5,6 @@ import lombok.extern.java.Log;
 import org.javamoney.moneta.Money;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.training.shop.commons.aop.Loggable;
-import pl.training.shop.commons.aop.MinLength;
 import pl.training.shop.payments.service.integration.PaymentRepository;
 import pl.training.shop.time.TimeProvider;
 
@@ -21,7 +19,6 @@ public class PaymentProcessor implements PaymentService {
     private final PaymentRepository paymentsRepository;
     private final TimeProvider timeProvider;
 
-    @Loggable
     @Override
     public PaymentDomain process(PaymentRequestDomain paymentRequest) {
         var paymentValue = calculatePaymentValue(paymentRequest.getValue());
@@ -44,7 +41,7 @@ public class PaymentProcessor implements PaymentService {
     }
 
     @Override
-    public PaymentDomain getById(@MinLength String id) {
+    public PaymentDomain getById(String id) {
         return paymentsRepository.getById(id)
                 .orElseThrow(PaymentNotFoundException::new);
     }
