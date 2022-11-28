@@ -3,9 +3,9 @@ package pl.training.shop.payments;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.training.shop.payments.domain.*;
-import pl.training.shop.payments.ports.PaymentRepository;
-import pl.training.shop.payments.ports.PaymentService;
-import pl.training.shop.payments.ports.TimeProvider;
+import pl.training.shop.payments.ports.output.PaymentRepository;
+import pl.training.shop.payments.ports.input.PaymentService;
+import pl.training.shop.payments.ports.output.TimeProvider;
 
 @Configuration
 public class PaymentConfiguration {

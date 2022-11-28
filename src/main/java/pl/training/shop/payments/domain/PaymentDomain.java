@@ -10,7 +10,7 @@ import java.time.Instant;
 @Value
 public class PaymentDomain {
 
-    String id;
+    PaymentIdDomain id;
     Money value;
     Instant timestamp;
     PaymentStatusDomain status;

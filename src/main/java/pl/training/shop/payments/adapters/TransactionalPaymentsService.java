@@ -1,12 +1,13 @@
-package pl.training.shop.payments;
+package pl.training.shop.payments.adapters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.training.shop.payments.domain.PaymentDomain;
+import pl.training.shop.payments.domain.PaymentIdDomain;
 import pl.training.shop.payments.domain.PaymentRequestDomain;
-import pl.training.shop.payments.ports.PaymentService;
+import pl.training.shop.payments.ports.input.PaymentService;
 
 @Primary
 @Transactional
@@ -22,8 +23,8 @@ public class TransactionalPaymentsService implements PaymentService {
     }
 
     @Override
-    public PaymentDomain getById(String id) {
-        return paymentService.getById(id);
+    public PaymentDomain getById(PaymentIdDomain paymentIdDomain) {
+        return paymentService.getById(paymentIdDomain);
     }
 
 }

@@ -2,6 +2,6 @@ package pl.training.shop.payments.domain;
 
 public interface PaymentIdGenerator {
 
-    String getNext();
+    PaymentIdDomain getNext();
 
 }

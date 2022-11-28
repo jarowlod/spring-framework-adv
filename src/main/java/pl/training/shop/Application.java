@@ -4,7 +4,7 @@ import lombok.extern.java.Log;
 import org.javamoney.moneta.Money;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import pl.training.shop.payments.domain.PaymentRequestDomain;
-import pl.training.shop.payments.ports.PaymentService;
+import pl.training.shop.payments.ports.input.PaymentService;
 
 @Log
 public class Application {

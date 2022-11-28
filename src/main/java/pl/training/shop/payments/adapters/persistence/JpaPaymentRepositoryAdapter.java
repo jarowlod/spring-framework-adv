@@ -5,7 +5,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import pl.training.shop.commons.Adapter;
 import pl.training.shop.payments.domain.PaymentDomain;
-import pl.training.shop.payments.ports.PaymentRepository;
+import pl.training.shop.payments.domain.PaymentIdDomain;
+import pl.training.shop.payments.ports.output.PaymentRepository;
 
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class JpaPaymentRepositoryAdapter implements PaymentRepository {
 
     private final JpaPaymentRepository paymentRepository;
-    private final JpaPaymentPersistenceMapper mapper;
+    private final JpaPaymentRepositoryMapper mapper;
 
     @Override
     public PaymentDomain save(PaymentDomain paymentDomain) {
@@ -24,8 +25,9 @@ public class JpaPaymentRepositoryAdapter implements PaymentRepository {
     }
 
     @Override
-    public Optional<PaymentDomain> getById(String id) {
-        return paymentRepository.getById(id)
+    public Optional<PaymentDomain> getById(PaymentIdDomain paymentIdDomain) {
+        var paymentIdEntity = mapper.toEntity(paymentIdDomain);
+        return paymentRepository.getById(paymentIdEntity)
                 .map(mapper::toDomain);
     }
 

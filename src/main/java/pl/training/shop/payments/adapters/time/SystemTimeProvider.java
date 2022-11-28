@@ -1,9 +1,11 @@
 package pl.training.shop.payments.adapters.time;
 
-import pl.training.shop.payments.ports.TimeProvider;
+import org.springframework.stereotype.Service;
+import pl.training.shop.payments.ports.output.TimeProvider;
 
 import java.time.Instant;
 
+@Service
 public class SystemTimeProvider implements TimeProvider {
 
     @Override
