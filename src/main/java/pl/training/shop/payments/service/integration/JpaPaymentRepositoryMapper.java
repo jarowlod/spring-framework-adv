@@ -3,13 +3,13 @@ package pl.training.shop.payments.service.integration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import pl.training.shop.payments.persistence.PaymentEntity;
-import pl.training.shop.payments.service.model.PaymentIdDomain;
 import pl.training.shop.payments.service.model.PaymentDomain;
+import pl.training.shop.payments.service.model.PaymentIdDomain;
 
-@Mapper(componentModel = "spring", imports = {java.math.BigDecimal.class, org.javamoney.moneta.Money.class})
+@Mapper(componentModel = "spring", imports = {org.javamoney.moneta.Money.class})
 public interface JpaPaymentRepositoryMapper {
 
-    @Mapping(target = "value", expression = "java(BigDecimal.valueOf(paymentDomain.getValue().getNumber().doubleValueExact()))")
+    @Mapping(target = "value", expression = "java(paymentDomain.getValue().getNumberStripped())")
     @Mapping(target = "currency", expression = "java(paymentDomain.getValue().getCurrency().getCurrencyCode())")
     PaymentEntity toEntity(PaymentDomain paymentDomain);
 
