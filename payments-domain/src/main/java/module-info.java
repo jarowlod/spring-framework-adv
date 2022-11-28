@@ -1,4 +1,4 @@
-module pl.training.payments.domain {
+open module pl.training.payments.domain {
     exports pl.training.payments.domain.services;
 
     requires pl.training.payments.ports;

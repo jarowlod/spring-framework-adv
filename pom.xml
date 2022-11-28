@@ -12,9 +12,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>payments-adapters</module>
         <module>payments-domain</module>
         <module>payments-ports</module>
-        <module>payments-adapters</module>
         <module>shop</module>
     </modules>
 

@@ -26,7 +26,6 @@
                 <configuration>
                     <source>17</source>
                     <target>17</target>
-                    <outputDirectory>./target</outputDirectory>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
