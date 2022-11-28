@@ -1,4 +1,4 @@
-open module pl.training.payments.adapters {
+module pl.training.payments.adapters {
     exports pl.training.payments.adapters.input.rest;
     exports pl.training.payments.adapters.output.persistence;
     exports pl.training.payments.adapters.output.time;

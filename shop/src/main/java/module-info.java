@@ -1,4 +1,4 @@
-open module pl.training.shop {
+module pl.training.shop {
     requires pl.training.payments.domain;
     requires pl.training.payments.adapters;
     requires transitive pl.training.payments.ports;
