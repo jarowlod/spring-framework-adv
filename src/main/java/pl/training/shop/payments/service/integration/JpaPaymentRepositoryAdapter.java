@@ -14,7 +14,7 @@ import java.util.Optional;
 public class JpaPaymentRepositoryAdapter implements PaymentRepository {
 
     private final JpaPaymentRepository paymentRepository;
-    private final JpaPaymentPersistenceMapper mapper;
+    private final JpaPaymentRepositoryMapper mapper;
 
     @Override
     public PaymentDomain save(PaymentDomain paymentDomain) {
@@ -24,8 +24,8 @@ public class JpaPaymentRepositoryAdapter implements PaymentRepository {
 
     @Override
     public Optional<PaymentDomain> getById(PaymentIdDomain paymentIdDomain) {
-        var idEntity = mapper.toEntity(paymentIdDomain);
-        return paymentRepository.getById(idEntity)
+        var paymentIdEntity = mapper.toEntity(paymentIdDomain);
+        return paymentRepository.getById(paymentIdEntity)
                 .map(mapper::toDomain);
     }
 

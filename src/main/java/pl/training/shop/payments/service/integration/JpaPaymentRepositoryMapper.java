@@ -7,7 +7,7 @@ import pl.training.shop.payments.service.model.PaymentIdDomain;
 import pl.training.shop.payments.service.model.PaymentDomain;
 
 @Mapper(componentModel = "spring", imports = {java.math.BigDecimal.class, org.javamoney.moneta.Money.class})
-public interface JpaPaymentPersistenceMapper {
+public interface JpaPaymentRepositoryMapper {
 
     @Mapping(target = "value", expression = "java(BigDecimal.valueOf(paymentDomain.getValue().getNumber().doubleValueExact()))")
     @Mapping(target = "currency", expression = "java(paymentDomain.getValue().getCurrency().getCurrencyCode())")
