@@ -5,7 +5,7 @@ import pl.training.shop.commons.data.validation.Base;
 import pl.training.shop.commons.data.validation.Extended;
 import pl.training.shop.commons.data.validation.Money;
 
-import javax.validation.constraints.Min;
+import jakarta.validation.constraints.Min;
 
 @Data
 public class PaymentRequestDto {
