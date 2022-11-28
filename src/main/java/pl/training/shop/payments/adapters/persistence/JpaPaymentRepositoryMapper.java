@@ -8,10 +8,10 @@ import pl.training.shop.payments.domain.PaymentDomain;
 import pl.training.shop.payments.domain.PaymentIdDomain;
 import pl.training.shop.payments.domain.PaymentStatusDomain;
 
-@Mapper(componentModel = "spring", imports = {java.math.BigDecimal.class, org.javamoney.moneta.Money.class})
+@Mapper(componentModel = "spring", imports = {org.javamoney.moneta.Money.class})
 public interface JpaPaymentRepositoryMapper {
 
-    @Mapping(target = "value", expression = "java(BigDecimal.valueOf(paymentDomain.getValue().getNumber().doubleValueExact()))")
+    @Mapping(target = "value", expression = "java(paymentDomain.getValue().getNumberStripped())")
     @Mapping(target = "currency", expression = "java(paymentDomain.getValue().getCurrency().getCurrencyCode())")
     PaymentEntity toEntity(PaymentDomain paymentDomain);
 
