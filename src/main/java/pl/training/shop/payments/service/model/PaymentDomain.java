@@ -1,4 +1,4 @@
-package pl.training.shop.payments.service;
+package pl.training.shop.payments.service.model;
 
 import lombok.Builder;
 import lombok.Value;
@@ -10,7 +10,7 @@ import java.time.Instant;
 @Value
 public class PaymentDomain {
 
-    String id;
+    PaymentIdDomain id;
     Money value;
     Instant timestamp;
     PaymentStatusDomain status;

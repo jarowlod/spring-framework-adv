@@ -5,8 +5,13 @@ import lombok.extern.java.Log;
 import org.javamoney.moneta.Money;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.training.shop.payments.service.integration.PaymentRepository;
-import pl.training.shop.time.TimeProvider;
+import pl.training.shop.payments.service.input.PaymentService;
+import pl.training.shop.payments.service.model.PaymentIdDomain;
+import pl.training.shop.payments.service.model.PaymentDomain;
+import pl.training.shop.payments.service.model.PaymentRequestDomain;
+import pl.training.shop.payments.service.model.PaymentStatusDomain;
+import pl.training.shop.payments.service.output.PaymentRepository;
+import pl.training.shop.payments.service.output.TimeProvider;
 
 @Transactional
 @Service("paymentService")
@@ -41,8 +46,8 @@ public class PaymentProcessor implements PaymentService {
     }
 
     @Override
-    public PaymentDomain getById(String id) {
-        return paymentsRepository.getById(id)
+    public PaymentDomain getById(PaymentIdDomain paymentIdDomain) {
+        return paymentsRepository.getById(paymentIdDomain)
                 .orElseThrow(PaymentNotFoundException::new);
     }
 

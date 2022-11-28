@@ -1,6 +1,7 @@
 package pl.training.shop;
 
 import com.zaxxer.hikari.HikariDataSource;
+import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.*;
@@ -10,10 +11,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import pl.training.shop.time.SystemTimeProvider;
-import pl.training.shop.time.TimeProvider;
 
-import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -23,11 +21,6 @@ import java.util.Properties;
 @ComponentScan
 @Configuration
 public class ApplicationConfiguration {
-
-    @Bean
-    public TimeProvider systemTimeProvider() {
-        return new SystemTimeProvider();
-    }
 
     @Bean
     public DataSource dataSource(Environment environment) {

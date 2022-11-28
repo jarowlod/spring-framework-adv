@@ -3,8 +3,8 @@ package pl.training.shop;
 import lombok.extern.java.Log;
 import org.javamoney.moneta.Money;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import pl.training.shop.payments.service.PaymentRequestDomain;
-import pl.training.shop.payments.service.PaymentService;
+import pl.training.shop.payments.service.model.PaymentRequestDomain;
+import pl.training.shop.payments.service.input.PaymentService;
 
 @Log
 public class Application {

@@ -1,4 +1,4 @@
-package pl.training.shop.payments.service;
+package pl.training.shop.payments.service.model;
 
 import lombok.Value;
 import org.javamoney.moneta.Money;

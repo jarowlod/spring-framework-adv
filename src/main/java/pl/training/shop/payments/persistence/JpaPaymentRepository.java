@@ -14,13 +14,13 @@ public class JpaPaymentRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public PaymentEntity save(PaymentEntity payment) {
-        entityManager.persist(payment);
-        return payment;
+    public PaymentEntity save(PaymentEntity paymentEntity) {
+        entityManager.persist(paymentEntity);
+        return paymentEntity;
     }
 
-    public Optional<PaymentEntity> getById(String id) {
-        return Optional.ofNullable(entityManager.find(PaymentEntity.class, id));
+    public Optional<PaymentEntity> getById(String idEntity) {
+        return Optional.ofNullable(entityManager.find(PaymentEntity.class, idEntity));
     }
 
 }

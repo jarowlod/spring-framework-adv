@@ -3,7 +3,9 @@ package pl.training.shop.payments.service.integration;
 import lombok.RequiredArgsConstructor;
 import pl.training.shop.commons.Adapter;
 import pl.training.shop.payments.persistence.JpaPaymentRepository;
-import pl.training.shop.payments.service.PaymentDomain;
+import pl.training.shop.payments.service.model.PaymentIdDomain;
+import pl.training.shop.payments.service.model.PaymentDomain;
+import pl.training.shop.payments.service.output.PaymentRepository;
 
 import java.util.Optional;
 
@@ -21,8 +23,9 @@ public class JpaPaymentRepositoryAdapter implements PaymentRepository {
     }
 
     @Override
-    public Optional<PaymentDomain> getById(String id) {
-        return paymentRepository.getById(id)
+    public Optional<PaymentDomain> getById(PaymentIdDomain paymentIdDomain) {
+        var idEntity = mapper.toEntity(paymentIdDomain);
+        return paymentRepository.getById(idEntity)
                 .map(mapper::toDomain);
     }
 
