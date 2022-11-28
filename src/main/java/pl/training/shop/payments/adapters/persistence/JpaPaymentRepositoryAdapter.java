@@ -8,6 +8,7 @@ import pl.training.shop.commons.Adapter;
 import pl.training.shop.commons.data.Page;
 import pl.training.shop.commons.data.ResultPage;
 import pl.training.shop.payments.domain.PaymentDomain;
+import pl.training.shop.payments.domain.PaymentIdDomain;
 import pl.training.shop.payments.domain.PaymentStatusDomain;
 import pl.training.shop.payments.ports.PaymentRepository;
 
@@ -18,8 +19,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JpaPaymentRepositoryAdapter implements PaymentRepository {
 
-    private final JpaPaymentPaymentRepository paymentRepository;
-    private final JpaPaymentPersistenceMapper mapper;
+    private final JpaPaymentRepository paymentRepository;
+    private final JpaPaymentRepositoryMapper mapper;
 
     @Override
     public PaymentDomain save(PaymentDomain paymentDomain) {
@@ -28,16 +29,17 @@ public class JpaPaymentRepositoryAdapter implements PaymentRepository {
     }
 
     @Override
-    public Optional<PaymentDomain> getById(String id) {
-        return paymentRepository.findById(id)
+    public Optional<PaymentDomain> getById(PaymentIdDomain paymentIdDomain) {
+        var paymentIdEntity = mapper.toEntity(paymentIdDomain);
+        return paymentRepository.findById(paymentIdEntity)
                 .map(mapper::toDomain);
     }
 
     @Override
     public ResultPage<PaymentDomain> getByStatus(PaymentStatusDomain paymentStatusDomain, Page page) {
-        var status = mapper.toEntity(paymentStatusDomain);
-        var result = paymentRepository.getByStatus(status, PageRequest.of(page.getNumber(), page.getSize()));
-        return mapper.toDomain(result);
+        var statusEntity = mapper.toEntity(paymentStatusDomain);
+        var resultEntity = paymentRepository.getByStatus(statusEntity, PageRequest.of(page.getNumber(), page.getSize()));
+        return mapper.toDomain(resultEntity);
     }
 
 }

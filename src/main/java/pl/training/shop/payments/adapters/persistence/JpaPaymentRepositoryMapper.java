@@ -5,10 +5,11 @@ import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;
 import pl.training.shop.commons.data.ResultPage;
 import pl.training.shop.payments.domain.PaymentDomain;
+import pl.training.shop.payments.domain.PaymentIdDomain;
 import pl.training.shop.payments.domain.PaymentStatusDomain;
 
 @Mapper(componentModel = "spring", imports = {java.math.BigDecimal.class, org.javamoney.moneta.Money.class})
-public interface JpaPaymentPersistenceMapper {
+public interface JpaPaymentRepositoryMapper {
 
     @Mapping(target = "value", expression = "java(BigDecimal.valueOf(paymentDomain.getValue().getNumber().doubleValueExact()))")
     @Mapping(target = "currency", expression = "java(paymentDomain.getValue().getCurrency().getCurrencyCode())")
@@ -22,5 +23,13 @@ public interface JpaPaymentPersistenceMapper {
     @Mapping(source = "content", target = "data")
     @Mapping(source = "number", target = "pageNumber")
     ResultPage<PaymentDomain> toDomain(Page<PaymentEntity> paymentEntityPage);
+
+    default String toEntity(PaymentIdDomain paymentIdDomain) {
+        return paymentIdDomain.getValue();
+    }
+
+    default PaymentIdDomain toDomain(String idEntity) {
+        return new PaymentIdDomain(idEntity);
+    }
 
 }

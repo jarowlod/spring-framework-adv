@@ -40,8 +40,8 @@ public class PaymentProcessor implements PaymentService {
     }
 
     @Override
-    public PaymentDomain getById(String id) {
-        return paymentsRepository.getById(id)
+    public PaymentDomain getById(PaymentIdDomain paymentIdDomain) {
+        return paymentsRepository.getById(paymentIdDomain)
                 .orElseThrow(PaymentNotFoundException::new);
     }
 

@@ -41,7 +41,8 @@ public class PaymentRestAdapter {
 
     @GetMapping("{id}")
     public ResponseEntity<PaymentDto> getById(@PathVariable String id) {
-        var paymentDomain = paymentService.getById(id);
+        var paymentIdDomain = mapper.toDomain(id);
+        var paymentDomain = paymentService.getById(paymentIdDomain);
         var paymentDto = mapper.toDto(paymentDomain);
         return ResponseEntity.ok(paymentDto);
     }

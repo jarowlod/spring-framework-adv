@@ -1,4 +1,4 @@
-package pl.training.shop.payments;
+package pl.training.shop.payments.adapters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.training.shop.commons.data.Page;
 import pl.training.shop.commons.data.ResultPage;
 import pl.training.shop.payments.domain.PaymentDomain;
+import pl.training.shop.payments.domain.PaymentIdDomain;
 import pl.training.shop.payments.domain.PaymentRequestDomain;
 import pl.training.shop.payments.domain.PaymentStatusDomain;
 import pl.training.shop.payments.ports.PaymentService;
@@ -25,8 +26,8 @@ public class TransactionalPaymentsService implements PaymentService {
     }
 
     @Override
-    public PaymentDomain getById(String id) {
-        return paymentService.getById(id);
+    public PaymentDomain getById(PaymentIdDomain paymentIdDomain) {
+        return paymentService.getById(paymentIdDomain);
     }
 
     @Override
