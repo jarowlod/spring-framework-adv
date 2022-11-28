@@ -1,28 +1,25 @@
 package pl.training.payments.domain.services;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.javamoney.moneta.Money;
-import pl.training.shop.commons.data.Page;
-import pl.training.shop.commons.data.ResultPage;
-import pl.training.shop.payments.ports.PaymentRepository;
-import pl.training.shop.payments.ports.PaymentService;
-import pl.training.shop.payments.ports.TimeProvider;
+import pl.training.payments.adapters.output.PaymentsWriterAdapter;
+import pl.training.payments.domain.model.PaymentDomain;
+import pl.training.payments.domain.model.PaymentRequestDomain;
+import pl.training.payments.domain.model.PaymentStatusDomain;
+import pl.training.payments.ports.output.TimeProvider;
 
-@Log
 @RequiredArgsConstructor
-public class ProcessPaymentService implements PaymentService {
+public class ProcessPaymentService {
 
     private final PaymentIdGenerator paymentIdGenerator;
     private final PaymentFeeCalculator paymentFeeCalculator;
-    private final PaymentRepository paymentsRepository;
+    private final PaymentsWriterAdapter paymentsWriter;
     private final TimeProvider timeProvider;
 
-    @Override
     public PaymentDomain process(PaymentRequestDomain paymentRequest) {
         var paymentValue = calculatePaymentValue(paymentRequest.getValue());
         var payment = createPayment(paymentValue);
-        return paymentsRepository.save(payment);
+        return paymentsWriter.save(payment);
     }
 
     private PaymentDomain createPayment(Money paymentValue) {
@@ -37,17 +34,6 @@ public class ProcessPaymentService implements PaymentService {
     private Money calculatePaymentValue(Money paymentValue) {
         var paymentFee = paymentFeeCalculator.calculateFee(paymentValue);
         return paymentValue.add(paymentFee);
-    }
-
-    @Override
-    public PaymentDomain getById(PaymentIdDomain paymentIdDomain) {
-        return paymentsRepository.getById(paymentIdDomain)
-                .orElseThrow(PaymentNotFoundException::new);
-    }
-
-    @Override
-    public ResultPage<PaymentDomain> getByStatus(PaymentStatusDomain paymentStatusDomain, Page page) {
-        return paymentsRepository.getByStatus(paymentStatusDomain, page);
     }
 
 }

@@ -1,7 +1,7 @@
 package pl.training.payments.domain.services;
 
 import lombok.RequiredArgsConstructor;
-import pl.training.payments.adapters.PaymentsReaderAdapter;
+import pl.training.payments.adapters.output.PaymentsReaderAdapter;
 import pl.training.payments.domain.model.*;
 import pl.training.payments.ports.model.PaymentNotFoundException;
 
