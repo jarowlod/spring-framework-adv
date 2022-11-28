@@ -1,7 +1,8 @@
-open module pl.training.payments.domain {
+module pl.training.payments.domain {
     exports pl.training.payments.domain.services;
 
     requires pl.training.payments.ports;
+
     requires org.javamoney.moneta;
     requires static lombok;
     requires static org.mapstruct;
