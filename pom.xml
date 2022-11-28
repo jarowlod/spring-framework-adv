@@ -12,10 +12,10 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>shop</module>
+        <module>payments-ports</module>
         <module>payments-adapters</module>
         <module>payments-domain</module>
-        <module>payments-ports</module>
-        <module>shop</module>
     </modules>
 
 </project>
