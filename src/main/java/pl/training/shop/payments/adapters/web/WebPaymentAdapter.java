@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
 @RequestMapping("payments/process")
 @Controller
 @RequiredArgsConstructor
-public class PaymentWebAdapter {
+public class WebPaymentAdapter {
 
     private final PaymentService paymentService;
     private final WebPaymentMapper mapper;

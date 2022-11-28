@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/payments/0b331c7a-df35-4eb2-8f2a-8e7d4d1g6843
+GET http://localhost:8080/api/payments/0b331c7a-df35-4eb2-8e2a-8e7d4d1g6843
 Accept: application/json
 Content-Type: application/json
 

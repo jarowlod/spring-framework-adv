@@ -15,24 +15,24 @@ import static pl.training.shop.payments.domain.PaymentStatusDomain.STARTED;
 @RequestMapping("api/payments")
 @RestController
 @RequiredArgsConstructor
-public class PaymentRestAdapter {
+public class RestPaymentAdapter {
 
     private final PaymentService paymentService;
     private final RestPaymentMapper mapper;
 
     @PostMapping()
     public ResponseEntity<PaymentDto> process(/*@Valid*/ @Validated(Base.class) @RequestBody PaymentRequestDto paymentRequestDto) {
-        var paymentRequest = mapper.toDomain(paymentRequestDto);
-        var paymentDomain = paymentService.process(paymentRequest);
+        var paymentRequestDomain = mapper.toDomain(paymentRequestDto);
+        var paymentDomain = paymentService.process(paymentRequestDomain);
         var paymentDto = mapper.toDto(paymentDomain);
         var locationUri = LocationUri.fromRequest(paymentDto.getId());
         return ResponseEntity.created(locationUri)
                 .body(paymentDto);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<PaymentDto> getById(@PathVariable String id) {
-        var paymentIdDomain = mapper.toDomain(id);
+    @GetMapping("{idDto}")
+    public ResponseEntity<PaymentDto> getById(@PathVariable String idDto) {
+        var paymentIdDomain = mapper.toDomain(idDto);
         var paymentDomain = paymentService.getById(paymentIdDomain);
         var paymentDto = mapper.toDto(paymentDomain);
         return ResponseEntity.ok(paymentDto);
@@ -42,8 +42,7 @@ public class PaymentRestAdapter {
     public ResponseEntity<ResultPageDto<PaymentDto>> getStartedPayments(
             @RequestParam(required = false, defaultValue = "0") int pageNumer,
             @RequestParam(required = false, defaultValue = "5") int pageSize) {
-        var page = new Page(pageNumer, pageSize);
-        var resultPage = paymentService.getByStatus(STARTED, page);
+        var resultPage = paymentService.getByStatus(STARTED, new Page(pageNumer, pageSize));
         var resultPageDto = mapper.toDto(resultPage);
         return ResponseEntity.ok(resultPageDto);
     }

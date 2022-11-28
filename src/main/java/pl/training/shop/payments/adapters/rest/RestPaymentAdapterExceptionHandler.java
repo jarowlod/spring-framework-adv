@@ -17,7 +17,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Order(HIGHEST_PRECEDENCE)
 @ControllerAdvice("pl.training.shop.payments.adapters.rest")
 @RequiredArgsConstructor
-public class PaymentRestExceptionHandler {
+public class RestPaymentAdapterExceptionHandler {
 
     private final RestExceptionResponseBuilder responseBuilder;
 
