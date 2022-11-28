@@ -14,10 +14,6 @@ public interface PaymentsDomainMapper {
 
     PaymentPort toPort(PaymentDomain paymentDomain);
 
-    default MoneyPort toPort(Money money) {
-        return new MoneyPort(money.getNumberStripped(), money.getCurrency().getCurrencyCode());
-    }
-
     PaymentStatusDomain toDomain(PaymentStatusPort paymentStatusPort);
 
     PaymentStatusPort toPort(PaymentStatusDomain paymentStatusDomain);
@@ -33,5 +29,17 @@ public interface PaymentsDomainMapper {
     PaymentRequestDomain toDomain(PaymentRequestPort paymentRequestPort);
 
     PaymentDomain toDomain(PaymentPort paymentPort);
+
+    default MoneyPort toPort(Money money) {
+        return new MoneyPort(money.getNumberStripped(), money.getCurrency().getCurrencyCode());
+    }
+
+    default Money toMoney(MoneyPort moneyPort) {
+        return Money.of(moneyPort.getValue(), moneyPort.getCurrencySymbol());
+    }
+
+    default Long toDomain(PaymentRequestIdPort paymentRequestIdPort) {
+        return paymentRequestIdPort.getId();
+    }
 
 }

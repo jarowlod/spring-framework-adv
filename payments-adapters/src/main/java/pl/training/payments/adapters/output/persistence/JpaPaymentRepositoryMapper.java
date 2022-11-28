@@ -3,19 +3,16 @@ package pl.training.payments.adapters.output.persistence;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.data.domain.Page;
-import pl.training.payments.ports.model.PaymentIdPort;
-import pl.training.payments.ports.model.PaymentPort;
-import pl.training.payments.ports.model.PaymentStatusPort;
-import pl.training.payments.ports.model.ResultPagePort;
+import pl.training.payments.ports.model.*;
 
-@Mapper(componentModel = "spring", imports = {org.javamoney.moneta.Money.class})
+@Mapper(componentModel = "spring", imports = {MoneyPort.class})
 public interface JpaPaymentRepositoryMapper {
 
-    @Mapping(target = "value", expression = "java(paymentDomain.getValue().getNumberStripped())")
-    @Mapping(target = "currency", expression = "java(paymentDomain.getValue().getCurrency().getCurrencyCode())")
+    @Mapping(target = "value", expression = "java(paymentPort.getValue().getValue())")
+    @Mapping(target = "currency", expression = "java(paymentPort.getValue().getCurrencySymbol())")
     PaymentEntity toEntity(PaymentPort paymentPort);
 
-    @Mapping(target = "value", expression = "java(Money.of(paymentEntity.getValue(), paymentEntity.getCurrency()))")
+    @Mapping(target = "value", expression = "java(new MoneyPort(paymentEntity.getValue(), paymentEntity.getCurrency()))")
     PaymentPort toPort(PaymentEntity paymentEntity);
 
     String toEntity(PaymentStatusPort paymentStatusPort);

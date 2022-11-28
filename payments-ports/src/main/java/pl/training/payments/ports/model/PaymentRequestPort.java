@@ -6,6 +6,6 @@ import lombok.Value;
 public class PaymentRequestPort {
 
     PaymentRequestIdPort id;
-    PaymentIdPort value;
+    MoneyPort value;
 
 }

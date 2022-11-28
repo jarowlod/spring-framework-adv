@@ -4,10 +4,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import pl.training.payments.adapters.commons.data.MoneyMapper;
 import pl.training.payments.adapters.commons.web.ResultPageDto;
-import pl.training.payments.ports.model.PaymentIdPort;
-import pl.training.payments.ports.model.PaymentPort;
-import pl.training.payments.ports.model.PaymentRequestPort;
-import pl.training.payments.ports.model.ResultPagePort;
+import pl.training.payments.ports.model.*;
+
+import java.math.BigDecimal;
 
 @Mapper(componentModel = "spring", uses = MoneyMapper.class)
 public interface RestPaymentMapper {
@@ -25,6 +24,19 @@ public interface RestPaymentMapper {
 
     default PaymentIdPort toPort(String idDto) {
         return new PaymentIdPort(idDto);
+    }
+
+    default PaymentRequestIdPort toPort(Long idDto) {
+        return new PaymentRequestIdPort(idDto);
+    }
+
+    default MoneyPort valueToPort(String valueDto) {
+        var parts = valueDto.split("\\s");
+        return new MoneyPort(new BigDecimal(parts[0]), parts[1]);
+    }
+
+    default String toDto(MoneyPort moneyPort) {
+        return moneyPort.getValue() + " " + moneyPort.getCurrencySymbol();
     }
 
 }
