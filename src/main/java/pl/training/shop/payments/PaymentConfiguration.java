@@ -2,28 +2,27 @@ package pl.training.shop.payments;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.training.shop.payments.domain.*;
-import pl.training.shop.payments.ports.PaymentRepository;
-import pl.training.shop.payments.ports.PaymentService;
-import pl.training.shop.payments.ports.TimeProvider;
+import pl.training.payments.domain.services.DefaultPaymentsFactory;
+import pl.training.payments.ports.PaymentsFactory;
+import pl.training.payments.ports.input.GetPaymentUseCase;
+import pl.training.payments.ports.input.ProcessPaymentUseCase;
+import pl.training.payments.ports.output.PaymentsReader;
+import pl.training.payments.ports.output.PaymentsWriter;
+import pl.training.payments.ports.output.TimeProvider;
 
 @Configuration
 public class PaymentConfiguration {
 
+    private static final PaymentsFactory PAYMENTS_FACTORY = new DefaultPaymentsFactory(0.01);
+
     @Bean
-    public PaymentIdGenerator paymentIdGenerator() {
-        return new UuidPaymentIdGenerator();
+    public GetPaymentUseCase getPaymentUseCase(PaymentsReader paymentsReader) {
+        return PAYMENTS_FACTORY.getPaymentUseCase(paymentsReader);
     }
 
     @Bean
-    public PaymentFeeCalculator percentagePaymentFeeCalculator() {
-        return new PercentagePaymentFeeCalculator(0.01);
-    }
-
-    @Bean
-    public PaymentService paymentService(PaymentIdGenerator paymentIdGenerator, PaymentFeeCalculator paymentFeeCalculator,
-                                         PaymentRepository paymentRepository, TimeProvider timeProvider) {
-        return new PaymentProcessor(paymentIdGenerator, paymentFeeCalculator, paymentRepository, timeProvider);
+    public ProcessPaymentUseCase processPaymentUseCase(PaymentsWriter paymentsWriter, TimeProvider timeProvider) {
+        return PAYMENTS_FACTORY.processPaymentUseCase(paymentsWriter, timeProvider);
     }
 
 }

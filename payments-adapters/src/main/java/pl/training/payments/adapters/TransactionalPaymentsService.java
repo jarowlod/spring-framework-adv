@@ -4,35 +4,32 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import pl.training.shop.commons.data.Page;
-import pl.training.shop.commons.data.ResultPage;
-import pl.training.shop.payments.domain.PaymentDomain;
-import pl.training.shop.payments.domain.PaymentIdDomain;
-import pl.training.shop.payments.domain.PaymentRequestDomain;
-import pl.training.shop.payments.domain.PaymentStatusDomain;
-import pl.training.shop.payments.ports.PaymentService;
+import pl.training.payments.ports.input.GetPaymentUseCase;
+import pl.training.payments.ports.input.ProcessPaymentUseCase;
+import pl.training.payments.ports.model.*;
 
 @Primary
 @Transactional
 @Component
 @RequiredArgsConstructor
-public class TransactionalPaymentsService implements PaymentService {
+public class TransactionalPaymentsService implements ProcessPaymentUseCase, GetPaymentUseCase {
 
-    private final PaymentService paymentService;
+    private final ProcessPaymentUseCase processPaymentUseCase;
+    private final GetPaymentUseCase getPaymentUseCase;
 
     @Override
-    public PaymentDomain process(PaymentRequestDomain paymentRequest) {
-        return paymentService.process(paymentRequest);
+    public PaymentPort getById(PaymentIdPort paymentIdPort) {
+        return getPaymentUseCase.getById(paymentIdPort);
     }
 
     @Override
-    public PaymentDomain getById(PaymentIdDomain paymentIdDomain) {
-        return paymentService.getById(paymentIdDomain);
+    public ResultPagePort<PaymentPort> getByStatus(PaymentStatusPort paymentStatusPort, PagePort pagePort) {
+        return getPaymentUseCase.getByStatus(paymentStatusPort, pagePort);
     }
 
     @Override
-    public ResultPage<PaymentDomain> getByStatus(PaymentStatusDomain paymentStatusDomain, Page page) {
-        return paymentService.getByStatus(paymentStatusDomain, page);
+    public PaymentPort process(PaymentRequestPort paymentRequestPort) {
+        return processPaymentUseCase.process(paymentRequestPort);
     }
 
 }
