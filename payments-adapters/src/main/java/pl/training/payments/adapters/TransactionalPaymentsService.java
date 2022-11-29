@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.training.payments.adapters.commons.aop.ExecutionTime;
+import pl.training.payments.ports.Processing;
 import pl.training.payments.ports.input.GetPaymentUseCase;
 import pl.training.payments.ports.input.ProcessPaymentUseCase;
 import pl.training.payments.ports.model.*;
@@ -27,6 +29,8 @@ public class TransactionalPaymentsService implements ProcessPaymentUseCase, GetP
         return getPaymentUseCase.getByStatus(paymentStatusPort, pagePort);
     }
 
+    @Processing
+    @ExecutionTime
     @Override
     public PaymentPort process(PaymentRequestPort paymentRequestPort) {
         return processPaymentUseCase.process(paymentRequestPort);

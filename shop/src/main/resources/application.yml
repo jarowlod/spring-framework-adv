@@ -14,3 +14,4 @@ spring:
 logging:
   level:
     org.javamoney.moneta: OFF
+timeExecutionLoggerOrder: 99999999
