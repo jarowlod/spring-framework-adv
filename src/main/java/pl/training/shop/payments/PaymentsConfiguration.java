@@ -6,7 +6,7 @@ import pl.training.shop.payments.service.PaymentFeeCalculator;
 import pl.training.shop.payments.service.PercentagePaymentFeeCalculator;
 
 @Configuration
-public class PaymentConfiguration {
+public class PaymentsConfiguration {
 
     @Bean
     public PaymentFeeCalculator percentagePaymentFeeCalculator() {
