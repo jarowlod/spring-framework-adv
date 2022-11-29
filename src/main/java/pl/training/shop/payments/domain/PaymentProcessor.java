@@ -19,8 +19,8 @@ public class PaymentProcessor implements PaymentService {
     private final TimeProvider timeProvider;
 
     @Override
-    public PaymentDomain process(PaymentRequestDomain paymentRequest) {
-        var paymentValue = calculatePaymentValue(paymentRequest.getValue());
+    public PaymentDomain process(PaymentRequestDomain paymentRequestDomain) {
+        var paymentValue = calculatePaymentValue(paymentRequestDomain.getValue());
         var payment = createPayment(paymentValue);
         return paymentsRepository.save(payment);
     }
