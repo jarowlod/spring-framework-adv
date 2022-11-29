@@ -5,7 +5,8 @@ import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.training.payments.adapters.commons.aop.ExecutionLogger;
+import pl.training.payments.adapters.commons.aop.ExecutionInterceptor;
+import pl.training.payments.adapters.commons.aop.LoggingAspect;
 import pl.training.payments.domain.services.DefaultPaymentsFactory;
 import pl.training.payments.ports.PaymentsFactory;
 import pl.training.payments.ports.input.GetPaymentUseCase;
@@ -33,7 +34,7 @@ public class PaymentsConfiguration {
     public Advisor paymentProcessingAdvisor() {
         var pointcut = new AspectJExpressionPointcut();
         pointcut.setExpression("bean(processPaymentUseCase)");
-        return new DefaultPointcutAdvisor(pointcut, new ExecutionLogger());
+        return new DefaultPointcutAdvisor(pointcut, new ExecutionInterceptor(new LoggingAspect()));
     }
 
 }
