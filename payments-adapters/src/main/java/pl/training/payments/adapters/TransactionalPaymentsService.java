@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.training.payments.adapters.commons.aop.ExecutionTime;
+import pl.training.payments.adapters.commons.aop.Retry;
 import pl.training.payments.ports.Processing;
 import pl.training.payments.ports.input.GetPaymentUseCase;
 import pl.training.payments.ports.input.ProcessPaymentUseCase;
@@ -29,6 +30,8 @@ public class TransactionalPaymentsService implements ProcessPaymentUseCase, GetP
         return getPaymentUseCase.getByStatus(paymentStatusPort, pagePort);
     }
 
+    //@Lock(type = WRITE)
+    @Retry
     @Processing
     @ExecutionTime
     @Override
