@@ -8,7 +8,7 @@ import pl.training.shop.payments.ports.input.PaymentService;
 import pl.training.shop.payments.ports.output.TimeProvider;
 
 @Configuration
-public class PaymentConfiguration {
+public class PaymentsConfiguration {
 
     @Bean
     public PaymentIdGenerator paymentIdGenerator() {
