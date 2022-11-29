@@ -38,4 +38,22 @@ public class Annotations {
                 .findFirst();
     }
 
+    @SuppressWarnings("unchecked")
+    public static  <P, A extends Annotation> void doForArgument(JoinPoint joinPoint, Class<A> annotationType, Task<P, A> task) throws NoSuchMethodException {
+        var arguments = joinPoint.getArgs();
+        var argumentsAnnotations = getTargetMethod(joinPoint).getParameterAnnotations();
+        for (int index = 0; index < arguments.length; index++) {
+            var argument = (P) arguments[index];
+            findAnnotation(argumentsAnnotations[index], annotationType).ifPresent(minLength -> task.tryDo(argument, minLength));
+        }
+    }
+
+
+    public interface Task<P, A> {
+
+        void tryDo(P parameterType, A annotationType);
+
+    }
+
 }
+
