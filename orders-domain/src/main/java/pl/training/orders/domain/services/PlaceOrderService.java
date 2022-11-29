@@ -18,7 +18,7 @@ public class PlaceOrderService implements PlaceOrderUseCase {
     @Override
     public void place(OrderPort orderPort) {
         var totalValue = orderPort.getTotalValue();
-        log.info("Processing new Order with value %s".formatted(totalValue));
+        log.info("Processing new Order with value %s %s".formatted(totalValue, DEFAULT_PAYMENT_CURRENCY));
         paymentService.pay(totalValue, DEFAULT_PAYMENT_CURRENCY, emptyMap())
                 .ifPresent(paymentPort -> log.info("Payment processed " + paymentPort));
     }

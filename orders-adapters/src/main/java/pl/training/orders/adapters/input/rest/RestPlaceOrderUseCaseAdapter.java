@@ -11,7 +11,7 @@ import pl.training.orders.ports.input.PlaceOrderUseCase;
 @RequestMapping("api/orders")
 @RestController
 @RequiredArgsConstructor
-public class PlaceOrderUseCaseAdapter {
+public class RestPlaceOrderUseCaseAdapter {
 
     private final PlaceOrderUseCase placeOrderUseCase;
     private final RestOrderMapper mapper;
