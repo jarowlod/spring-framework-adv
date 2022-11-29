@@ -3,6 +3,7 @@ package pl.training.payments.adapters.input.rest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.training.payments.adapters.commons.aop.MinLength;
 import pl.training.payments.adapters.commons.web.ResultPageDto;
 import pl.training.payments.ports.input.GetPaymentUseCase;
 import pl.training.payments.ports.model.PagePort;
@@ -18,7 +19,7 @@ public class RestGetPaymentUseCaseAdapter {
     private final RestPaymentMapper mapper;
 
     @GetMapping("{idDto}")
-    public ResponseEntity<PaymentDto> getById(@PathVariable String idDto) {
+    public ResponseEntity<PaymentDto> getById(@MinLength @PathVariable String idDto) {
         var paymentIdPort = mapper.toPort(idDto);
         var paymentPort = getPaymentUseCase.getById(paymentIdPort);
         var paymentDto = mapper.toDto(paymentPort);
