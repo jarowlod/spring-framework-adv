@@ -11,17 +11,17 @@ import java.util.Optional;
 
 public class Annotations {
 
-    public static  <T extends java.lang.annotation.Annotation> T getClassAnnotation(ProceedingJoinPoint joinPoint, Class<T> type) {
+    public static <T extends Annotation> T getClassAnnotation(ProceedingJoinPoint joinPoint, Class<T> type) {
         return joinPoint.getTarget().getClass().getAnnotation(type);
     }
 
-    public static  <T extends java.lang.annotation.Annotation> T getMethodAnnotation(ProceedingJoinPoint joinPoint, Class<T> type) throws NoSuchMethodException {
+    public static <T extends Annotation> T getMethodAnnotation(ProceedingJoinPoint joinPoint, Class<T> type) throws NoSuchMethodException {
         return getTargetMethod(joinPoint).getAnnotation(type);
     }
 
-    public static  <T extends java.lang.annotation.Annotation> T findAnnotation(ProceedingJoinPoint joinPoint, Class<T> type) throws NoSuchMethodException {
-        var annotation = getClassAnnotation(joinPoint, type);
-        return annotation != null ? annotation : getMethodAnnotation(joinPoint, type);
+    public static <T extends Annotation> T findAnnotation(ProceedingJoinPoint joinPoint, Class<T> type) throws NoSuchMethodException {
+        var annotation = getMethodAnnotation(joinPoint, type);
+        return annotation != null ? annotation : getClassAnnotation(joinPoint, type);
     }
 
     public static Method getTargetMethod(JoinPoint joinPoint) throws NoSuchMethodException {
@@ -36,6 +36,23 @@ public class Annotations {
                 .filter(type::isInstance)
                 .map(type::cast)
                 .findFirst();
+    }
+
+    @SuppressWarnings("unchecked")
+    public static  <P, A extends Annotation> void taskForArgument(JoinPoint joinPoint, Class<A> annotationType, Task<P, A> task) throws NoSuchMethodException {
+        var arguments = joinPoint.getArgs();
+        var argumentsAnnotations = getTargetMethod(joinPoint).getParameterAnnotations();
+        for (int index = 0; index < arguments.length; index++) {
+            var argument = (P) arguments[index];
+            findAnnotation(argumentsAnnotations[index], annotationType)
+                    .ifPresent(annotation -> task.tryDo(argument, annotation));
+        }
+    }
+
+    public interface Task<P, A> {
+
+        void tryDo(P parameterType, A annotationType);
+
     }
 
 }
