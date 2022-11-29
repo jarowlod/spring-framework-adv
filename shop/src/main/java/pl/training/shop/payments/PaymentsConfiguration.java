@@ -11,7 +11,7 @@ import pl.training.payments.ports.output.PaymentsWriter;
 import pl.training.payments.ports.output.TimeProvider;
 
 @Configuration
-public class PaymentConfiguration {
+public class PaymentsConfiguration {
 
     private static final PaymentsFactory PAYMENTS_FACTORY = new DefaultPaymentsFactory(0.01);
 

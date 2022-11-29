@@ -17,6 +17,8 @@
         <module>payments-adapters</module>
         <module>payments-domain</module>
         <module>orders-ports</module>
+        <module>orders-adapters</module>
+        <module>orders-domain</module>
     </modules>
 
 </project>
