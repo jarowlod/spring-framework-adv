@@ -1,12 +1,14 @@
 package pl.training.shop;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import pl.training.payments.adapters.commons.aop.TransactionWrapper;
 
 //@EnableAspectJAutoProxy
 @ComponentScan("pl.training")
@@ -21,6 +23,11 @@ public class ApplicationConfiguration implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:4200")
                 .allowedHeaders("*")
                 .allowedMethods("*");
+    }
+
+    @Bean
+    public TransactionWrapper transactionWrapper(PlatformTransactionManager transactionManager) {
+        return new TransactionWrapper(transactionManager);
     }
 
 }

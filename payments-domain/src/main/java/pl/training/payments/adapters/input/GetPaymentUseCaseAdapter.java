@@ -1,11 +1,13 @@
 package pl.training.payments.adapters.input;
 
 import lombok.RequiredArgsConstructor;
+import pl.training.commons.aop.Atomic;
 import pl.training.payments.adapters.PaymentsDomainMapper;
 import pl.training.payments.domain.services.GetPaymentService;
 import pl.training.payments.ports.input.GetPaymentUseCase;
 import pl.training.payments.ports.model.*;
 
+@Atomic
 @RequiredArgsConstructor
 public class GetPaymentUseCaseAdapter implements GetPaymentUseCase {
 

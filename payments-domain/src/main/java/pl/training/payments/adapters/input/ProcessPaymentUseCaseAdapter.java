@@ -1,6 +1,7 @@
 package pl.training.payments.adapters.input;
 
 import lombok.RequiredArgsConstructor;
+import pl.training.commons.aop.Atomic;
 import pl.training.payments.adapters.PaymentsDomainMapper;
 import pl.training.payments.domain.services.ProcessPaymentService;
 import pl.training.payments.ports.input.ProcessPaymentUseCase;
@@ -13,6 +14,7 @@ public class ProcessPaymentUseCaseAdapter implements ProcessPaymentUseCase {
     private final ProcessPaymentService processPaymentService;
     private final PaymentsDomainMapper mapper;
 
+    @Atomic
     @Override
     public PaymentPort process(PaymentRequestPort paymentRequestPort) {
         var paymentRequestDomain = mapper.toDomain(paymentRequestPort);

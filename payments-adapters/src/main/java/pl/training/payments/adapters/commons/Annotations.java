@@ -20,8 +20,8 @@ public class Annotations {
     }
 
     public static <T extends Annotation> T findAnnotation(ProceedingJoinPoint joinPoint, Class<T> type) throws NoSuchMethodException {
-        var annotation = getClassAnnotation(joinPoint, type);
-        return annotation != null ? annotation : getMethodAnnotation(joinPoint, type);
+        var annotation = getMethodAnnotation(joinPoint, type);
+        return annotation != null ? annotation : getClassAnnotation(joinPoint, type);
     }
 
     public static Method getTargetMethod(JoinPoint joinPoint) throws NoSuchMethodException {
