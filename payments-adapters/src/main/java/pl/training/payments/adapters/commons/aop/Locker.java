@@ -4,10 +4,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import pl.training.commons.aop.Lock;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import static pl.training.payments.adapters.commons.aop.Lock.LockType.WRITE;
+import static pl.training.commons.aop.Lock.LockType.WRITE;
 
 @Aspect
 @Component

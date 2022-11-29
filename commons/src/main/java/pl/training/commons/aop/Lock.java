@@ -1,4 +1,4 @@
-package pl.training.payments.adapters.commons.aop;
+package pl.training.commons.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

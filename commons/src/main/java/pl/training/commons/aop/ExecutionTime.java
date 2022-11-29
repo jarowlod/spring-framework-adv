@@ -1,14 +1,20 @@
-package pl.training.payments.adapters.commons.aop;
+package pl.training.commons.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.PARAMETER)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface MinLength {
+public @interface ExecutionTime {
 
-    int value() default 5;
+    TimeUnit timeUnit() default TimeUnit.NS;
+
+    enum TimeUnit {
+
+        NS, MS
+
+    }
 
 }

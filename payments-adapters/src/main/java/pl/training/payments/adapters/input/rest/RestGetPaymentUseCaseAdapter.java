@@ -3,7 +3,7 @@ package pl.training.payments.adapters.input.rest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.training.payments.adapters.commons.aop.MinLength;
+import pl.training.commons.aop.MinLength;
 import pl.training.payments.adapters.commons.web.ResultPageDto;
 import pl.training.payments.ports.input.GetPaymentUseCase;
 import pl.training.payments.ports.model.PagePort;

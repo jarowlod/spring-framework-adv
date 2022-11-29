@@ -4,6 +4,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
+import pl.training.commons.aop.MinLength;
 
 import static pl.training.payments.adapters.commons.Annotations.taskForArgument;
 
@@ -11,7 +12,7 @@ import static pl.training.payments.adapters.commons.Annotations.taskForArgument;
 @Component
 public class MinLengthValidator {
 
-    @Before("execution(* *(@pl.training.payments.adapters.commons.aop.MinLength (*)))")
+    @Before("execution(* *(@pl.training.commons.aop.MinLength (*)))")
     public void validate(JoinPoint joinPoint) throws Throwable {
         taskForArgument(joinPoint, MinLength.class, (String argument, MinLength minLength) -> {
             if (argument.length() < minLength.value()) {

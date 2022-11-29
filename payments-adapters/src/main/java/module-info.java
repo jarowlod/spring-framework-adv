@@ -4,6 +4,7 @@ module pl.training.payments.adapters {
     exports pl.training.payments.adapters.output.time;
 
     requires pl.training.payments.ports;
+    requires pl.training.commons;
 
     requires org.javamoney.moneta;
     requires spring.context;

@@ -19,6 +19,7 @@
         <module>orders-ports</module>
         <module>orders-adapters</module>
         <module>orders-domain</module>
+        <module>commons</module>
     </modules>
 
 </project>

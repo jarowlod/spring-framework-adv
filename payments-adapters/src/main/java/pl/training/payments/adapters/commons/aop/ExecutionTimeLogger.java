@@ -7,11 +7,10 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import pl.training.payments.adapters.commons.aop.ExecutionTime.TimeUnit;
+import pl.training.commons.aop.ExecutionTime;
 
-import static pl.training.payments.adapters.commons.aop.ExecutionTime.TimeUnit.NS;
+import static pl.training.commons.aop.ExecutionTime.TimeUnit.NS;
 
 //@Order(1_000)
 @Aspect
@@ -34,7 +33,7 @@ public class ExecutionTimeLogger implements Ordered {
         return result;
     }
 
-    private long getTime(TimeUnit timeUnit) {
+    private long getTime(ExecutionTime.TimeUnit timeUnit) {
         return timeUnit == NS ? System.nanoTime() : System.currentTimeMillis();
     }
 

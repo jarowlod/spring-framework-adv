@@ -1,14 +1,14 @@
-package pl.training.payments.adapters.commons.aop;
+package pl.training.commons.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.METHOD)
+@Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Retry {
+public @interface MinLength {
 
-    int attempts() default 3;
+    int value() default 5;
 
 }

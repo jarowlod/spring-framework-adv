@@ -1,22 +1,19 @@
 package pl.training.payments.adapters;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import pl.training.payments.adapters.commons.aop.ExecutionTime;
-import pl.training.payments.adapters.commons.aop.Lock;
-import pl.training.payments.adapters.commons.aop.Retry;
+import pl.training.commons.aop.ExecutionTime;
+import pl.training.commons.aop.Lock;
+import pl.training.commons.aop.Retry;
 import pl.training.payments.ports.Processing;
 import pl.training.payments.ports.input.GetPaymentUseCase;
 import pl.training.payments.ports.input.ProcessPaymentUseCase;
 import pl.training.payments.ports.model.*;
 
-import static pl.training.payments.adapters.commons.aop.Lock.LockType.WRITE;
+import static pl.training.commons.aop.Lock.LockType.WRITE;
 
-@Primary
-@Transactional
-@Component
+//@Primary
+//@Transactional
+//@Component
 @RequiredArgsConstructor
 public class TransactionalPaymentsService implements ProcessPaymentUseCase, GetPaymentUseCase {
 

@@ -1,4 +1,4 @@
-package pl.training.payments.adapters.commons.aop;
+package pl.training.commons.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,14 +7,8 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExecutionTime {
+public @interface Retry {
 
-    TimeUnit timeUnit() default TimeUnit.NS;
-
-    enum TimeUnit {
-
-        NS, MS
-
-    }
+    int attempts() default 3;
 
 }
