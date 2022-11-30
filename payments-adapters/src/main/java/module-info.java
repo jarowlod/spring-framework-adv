@@ -8,6 +8,7 @@ module pl.training.payments.adapters {
 
     requires org.javamoney.moneta;
     requires spring.context;
+    requires spring.boot;
     requires spring.core;
     requires spring.aop;
     requires spring.beans;

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.training.payments.adapters.commons.aop.TransactionWrapper;
@@ -13,7 +14,8 @@ import pl.training.payments.adapters.commons.aop.TransactionWrapper;
 //@EnableAspectJAutoProxy
 @ComponentScan("pl.training")
 @EntityScan("pl.training")
-@EnableJpaRepositories("pl.training")
+@EnableJpaRepositories(value = "pl.training", repositoryImplementationPostfix = "Custom")
+@EnableTransactionManagement(order = 1_000)
 @Configuration
 public class ApplicationConfiguration implements WebMvcConfigurer {
 
