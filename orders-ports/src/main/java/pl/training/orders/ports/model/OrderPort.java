@@ -8,7 +8,7 @@ import java.util.List;
 @Value
 public class OrderPort {
 
-    Long id;
+    OrderIdPort id;
     List<OrderEntryPort> entries;
 
     public BigDecimal getTotalValue() {

@@ -36,3 +36,9 @@ Content-Type: application/json
     }
   ]
 }
+
+###
+
+GET http://localhost:8080/api/orders/638772d76a321d72b8fb7887
+Accept: application/json
+Content-Type: application/json
