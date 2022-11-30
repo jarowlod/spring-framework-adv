@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +14,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
+import static org.springframework.data.domain.Sort.Direction.ASC;
 
 @Transactional
 @Component
@@ -42,6 +47,14 @@ public class JpaExamples implements ApplicationRunner {
         log.info("Result: " + result);
 
         log.info(paymentRepository.getWithValueGreaterThan(BigDecimal.ONE).toString());
+
+        var exampleEntity = new PaymentEntity();
+        exampleEntity.setStatus("CONFIRMED");
+        var matcher = ExampleMatcher.matching()
+                .withIgnoreCase()
+                .withIgnoreNullValues();
+        var secondResult = paymentRepository.findAll(Example.of(exampleEntity, matcher), Sort.by(ASC, "timestamp"));
+        log.info("Result: " + secondResult);
     }
 
     private PaymentEntity initDatabase() {
