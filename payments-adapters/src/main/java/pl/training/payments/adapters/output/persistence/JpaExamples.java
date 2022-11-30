@@ -9,13 +9,18 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.training.payments.adapters.commons.data.SearchCriteria;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import static org.springframework.data.domain.Sort.Direction.ASC;
+import static pl.training.payments.adapters.commons.data.SearchCriteria.Operator.EQUAL;
+import static pl.training.payments.adapters.commons.data.SearchCriteria.Operator.START_WITH;
 
 @Transactional
 @Component
@@ -27,10 +32,10 @@ public class JpaExamples implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        var paymentEntity = initDatabase();
-        var id= paymentEntity.getId();
+        //var paymentEntity = initDatabase();
+        var id ="3cba6ab7-8c28-46c5-81d5-5ee6e37cb21f";
 
-        paymentRepository.getPaymentViewById(id)
+        /*paymentRepository.getPaymentViewById(id)
                 .ifPresent(paymentEntityView -> log.info("Payment view: " + paymentEntityView));
 
         paymentRepository.getPaymentProjectionById(id)
@@ -54,16 +59,36 @@ public class JpaExamples implements ApplicationRunner {
                 .withIgnoreCase()
                 .withIgnoreNullValues();
         var secondResult = paymentRepository.findAll(Example.of(exampleEntity, matcher), Sort.by(ASC, "timestamp"));
-        log.info("Result: " + secondResult);
+        log.info("Result: " + secondResult);*/
+
+        //paymentRepository.findById(id);
+        //paymentRepository.findAll();
+        //paymentRepository.loadById(id);
+
+        var specification = new PaymentsSpecification(Set.of(
+                new SearchCriteria("status", START_WITH, "CON"),
+                new SearchCriteria("value", EQUAL, BigDecimal.TEN)
+        ));
+
+        log.info(paymentRepository.findAll(specification).toString());
     }
 
     private PaymentEntity initDatabase() {
+        var property = new PropertyEntity();
+        property.setKey("cardNumber");
+        property.setValue("1234567890");
+
+        var secondProperty = new PropertyEntity();
+        secondProperty.setKey("cvv");
+        secondProperty.setValue("123");
+
         var payment = new PaymentEntity();
         payment.setId(UUID.randomUUID().toString());
         payment.setStatus("CONFIRMED");
         payment.setTimestamp(Instant.now());
         payment.setValue(BigDecimal.TEN);
         payment.setCurrency("PLN");
+        payment.setProperties(List.of(property, secondProperty));
         return paymentRepository.save(payment);
     }
 
