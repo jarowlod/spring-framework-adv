@@ -12,7 +12,14 @@ spring:
     show-sql: true
   messages:
     basename: text,exceptions
+  data:
+    mongodb:
+      port: 27017
+      username: admin
+      password: admin
+      database: payments
 logging:
   level:
     org.javamoney.moneta: OFF
+    org.springframework.data.mongodb.repository.query: DEBUG
 timeExecutionLoggerOrder: 99999999
