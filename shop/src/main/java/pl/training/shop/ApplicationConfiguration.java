@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -14,6 +15,7 @@ import pl.training.payments.adapters.commons.aop.TransactionWrapper;
 //@EnableAspectJAutoProxy
 @ComponentScan("pl.training")
 @EntityScan("pl.training")
+@EnableMongoRepositories("pl.training")
 @EnableJpaRepositories(value = "pl.training", repositoryImplementationPostfix = "Custom")
 @EnableTransactionManagement(order = 1_000)
 @Configuration

@@ -16,6 +16,7 @@ module pl.training.payments.adapters {
     requires spring.webmvc;
     requires spring.tx;
     requires spring.data.jpa;
+    requires spring.data.mongodb;
     requires spring.data.commons;
     requires spring.boot.starter.web;
     requires spring.boot.starter.data.jpa;
