@@ -1,4 +1,4 @@
-package pl.training.payments.adapters.output.persistence;
+package pl.training.payments.adapters.output.persistence.jpa;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ import java.util.concurrent.Future;
 import java.util.stream.Stream;
 
 import static org.springframework.data.jpa.repository.EntityGraph.EntityGraphType.FETCH;
-import static pl.training.payments.adapters.output.persistence.PaymentEntity.WITHOUT_PROPERTIES;
+import static pl.training.payments.adapters.output.persistence.jpa.PaymentEntity.WITHOUT_PROPERTIES;
 
 public interface JpaPaymentRepository extends JpaRepository<PaymentEntity, String>, JpaPaymentRepositoryExtensions, JpaSpecificationExecutor<PaymentEntity> {
 
@@ -25,7 +25,7 @@ public interface JpaPaymentRepository extends JpaRepository<PaymentEntity, Strin
     @Query("select p from Payment as p where p.status = 'STARTED'")
     List<PaymentEntity> getAllStarted();
 
-    @Query("select new pl.training.payments.adapters.output.persistence.PaymentEntityView(p.id, p.status) from Payment p where p.id = :id")
+    @Query("select new pl.training.payments.adapters.output.persistence.jpa.PaymentEntityView(p.id, p.status) from Payment p where p.id = :id")
     Optional<PaymentEntityView> getPaymentViewById(String id);
 
     @Query("select p.id as id, p.status as status from Payment p where p.id = :id")

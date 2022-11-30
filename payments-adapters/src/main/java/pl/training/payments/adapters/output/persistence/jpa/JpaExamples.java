@@ -1,12 +1,9 @@
-package pl.training.payments.adapters.output.persistence;
+package pl.training.payments.adapters.output.persistence.jpa;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.training.payments.adapters.commons.data.SearchCriteria;
@@ -16,9 +13,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
-import static org.springframework.data.domain.Sort.Direction.ASC;
 import static pl.training.payments.adapters.commons.data.SearchCriteria.Operator.EQUAL;
 import static pl.training.payments.adapters.commons.data.SearchCriteria.Operator.START_WITH;
 
@@ -65,12 +60,12 @@ public class JpaExamples implements ApplicationRunner {
         //paymentRepository.findAll();
         //paymentRepository.loadById(id);
 
-        var specification = new PaymentsSpecification(Set.of(
+        /*var specification = new PaymentsSpecification(Set.of(
                 new SearchCriteria("status", START_WITH, "CON"),
                 new SearchCriteria("value", EQUAL, BigDecimal.TEN)
         ));
 
-        log.info(paymentRepository.findAll(specification).toString());
+        log.info(paymentRepository.findAll(specification).toString());*/
     }
 
     private PaymentEntity initDatabase() {

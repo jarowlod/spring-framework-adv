@@ -1,4 +1,4 @@
-package pl.training.payments.adapters.output.persistence;
+package pl.training.payments.adapters.output.persistence.jpa;
 
 import java.math.BigDecimal;
 import java.util.List;

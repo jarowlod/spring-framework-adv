@@ -1,7 +1,7 @@
 module pl.training.payments.adapters {
     exports pl.training.payments.adapters.input.rest;
-    exports pl.training.payments.adapters.output.persistence;
     exports pl.training.payments.adapters.output.time;
+    exports pl.training.payments.adapters.output.persistence.jpa;
 
     requires pl.training.payments.ports;
     requires pl.training.commons;
