@@ -1,8 +1,10 @@
 package pl.training.shop;
 
+import feign.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.training.payments.adapters.commons.aop.TransactionWrapper;
 import pl.training.payments.adapters.output.time.remote.RestTemplateTokenInterceptor;
 
+@EnableFeignClients("pl.training")
 //@EnableAspectJAutoProxy
 @ComponentScan("pl.training")
 @EntityScan("pl.training")
@@ -44,5 +47,6 @@ public class ApplicationConfiguration implements WebMvcConfigurer {
                 .additionalInterceptors(new RestTemplateTokenInterceptor(token))
                 .build();
     }
+
 
 }

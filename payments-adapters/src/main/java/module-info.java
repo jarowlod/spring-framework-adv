@@ -22,6 +22,8 @@ module pl.training.payments.adapters {
     requires spring.boot.starter.web;
     requires spring.boot.starter.data.jpa;
     requires spring.boot.starter.validation;
+    requires spring.cloud.starter.openfeign;
+    requires spring.cloud.openfeign.core;
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
     requires org.hibernate.validator;

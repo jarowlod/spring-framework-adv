@@ -19,11 +19,19 @@ spring:
       password: admin
       database: payments
       authentication-database: admin
+  cloud:
+    openfeign:
+      client:
+        config:
+          timeProvider:
+            logger-level: basic
 logging:
   level:
     org.javamoney.moneta: OFF
     org.springframework.data.mongodb.repository.query: DEBUG
     org.springframework.web.client.RestTemplate: DEBUG
+    pl.training: DEBUG
+    pl.training.payments.adapters.output.time.remote.TimeServiceApi: DEBUG
 timeExecutionLoggerOrder: 99999999
 timeApi:
   endpoint: http://worldtimeapi.org/api/timezone
