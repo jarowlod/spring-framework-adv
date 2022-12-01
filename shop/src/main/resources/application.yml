@@ -23,6 +23,7 @@ logging:
   level:
     org.javamoney.moneta: OFF
     org.springframework.data.mongodb.repository.query: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
 timeExecutionLoggerOrder: 99999999
 timeApi:
   endpoint: http://worldtimeapi.org/api/timezone
