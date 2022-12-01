@@ -24,3 +24,7 @@ logging:
     org.javamoney.moneta: OFF
     org.springframework.data.mongodb.repository.query: DEBUG
 timeExecutionLoggerOrder: 99999999
+timeApi:
+  endpoint: http://worldtimeapi.org/api/timezone
+  timezone: Europe/Warsaw
+  token: 1234
