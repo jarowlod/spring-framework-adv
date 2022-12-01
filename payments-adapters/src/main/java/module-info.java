@@ -23,6 +23,9 @@ module pl.training.payments.adapters {
     requires spring.boot.starter.data.jpa;
     requires spring.boot.starter.validation;
     requires spring.cloud.starter.openfeign;
+    requires spring.boot.starter.webflux;
+    requires spring.webflux;
+    requires reactor.core;
     requires spring.cloud.openfeign.core;
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
@@ -32,4 +35,5 @@ module pl.training.payments.adapters {
     requires static lombok;
     requires static org.mapstruct;
     requires static org.mapstruct.processor;
+    requires jakarta.annotation;
 }
