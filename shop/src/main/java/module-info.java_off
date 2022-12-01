@@ -13,4 +13,5 @@ module pl.training.shop {
     requires spring.data.jpa;
     requires spring.webmvc;
     requires lombok;
+    requires spring.aop;
 }
