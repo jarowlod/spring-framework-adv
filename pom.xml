@@ -21,6 +21,7 @@
         <module>orders-domain</module>
         <module>commons</module>
         <module>search</module>
+        <module>broker</module>
     </modules>
 
 </project>
