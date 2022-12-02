@@ -30,4 +30,4 @@ spring:
 #      mail.smtp.ssl.trust: smtp.gmail.com
 settings:
   default-topic: messages
-
+  languages: pl

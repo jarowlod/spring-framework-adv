@@ -16,7 +16,7 @@ public class TemplateService {
     private static final String LANGUAGE_SEPARATOR = "_";
 
     private final TemplateEngine templateEngine;
-    @Value("${languages}")
+    @Value("${settings.languages}")
     private final Set<String> languages;
 
     public String evaluate(String templateBaseName, Map<String, Object> data, String language) {
