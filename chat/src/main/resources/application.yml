@@ -17,6 +17,17 @@ spring:
     listener:
       concurrency: 10
     pub-sub-domain: true # topic
+  mail:
+    host: localhost
+    port: 10025
+#    host: smtp.gmail.com
+#    port: 587
+#    username: username
+#    password: password
+#    properties:
+#      mail.smtp.auth: true
+#      mail.smtp.starttls.enable: true
+#      mail.smtp.ssl.trust: smtp.gmail.com
 settings:
   default-topic: messages
 
