@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-@CacheConfig(cacheNames = "results", keyGenerator = "cacheKeyGenerator", cacheManager = "redisCacheManager")
+@CacheConfig(cacheNames = "results", keyGenerator = "cacheKeyGenerator")
 @Service
 @Log
 public class Calculator {
