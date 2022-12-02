@@ -16,4 +16,11 @@ public class ChatMessageDto {
     @With
     String timestamp;
 
+    public boolean isForALl() {
+        if (recipients == null) {
+            return true;
+        }
+        return recipients.stream().anyMatch(String::isEmpty);
+    }
+
 }

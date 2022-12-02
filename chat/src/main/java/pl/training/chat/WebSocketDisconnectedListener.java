@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
+import static pl.training.chat.WebSocketUtils.getAttributes;
 import static pl.training.chat.WebSocketUtils.getSocketId;
 
 @Component
@@ -17,9 +18,12 @@ public class WebSocketDisconnectedListener implements ApplicationListener<Sessio
 
     @Override
     public void onApplicationEvent(SessionDisconnectEvent event) {
-        var user = "Unknown";
-        log.info("Socket with socket id %s disconnected (user: %s): ".formatted(getSocketId(event), user));
-        systemMessageSender.send("User %s is now disconnected".formatted(user));
+        var socketId = getSocketId(event);
+        var username = getAttributes(event).get(socketId);
+        if (username != null) {
+            log.info("Socket with socket id %s disconnected (user: %s): ".formatted(getSocketId(event), username));
+            systemMessageSender.send("User %s is now disconnected".formatted(username));
+        }
     }
 
 }

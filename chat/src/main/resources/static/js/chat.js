@@ -23,6 +23,7 @@ $(() => {
     function onConnect() {
         updateView(true);
         stompClient.subscribe("/main-room", onMessage);
+        stompClient.subscribe(`/private-rooms/${getUser()}`, onMessage);
     }
 
     function getUser() {

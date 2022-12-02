@@ -1,5 +1,6 @@
 package pl.training.chat;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.java.Log;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -18,7 +19,7 @@ public class WebSocketHandshakeInterceptor implements HandshakeInterceptor {
         if (request instanceof ServletServerHttpRequest servletRequest) {
             var session = servletRequest.getServletRequest().getSession();
             attributes.put("sessionId", session.getId());
-            attributes.put("customId", UUID.randomUUID().toString());
+            attributes.put("clientId", UUID.randomUUID().toString());
         }
         log.info("Before handshake");
         return true;

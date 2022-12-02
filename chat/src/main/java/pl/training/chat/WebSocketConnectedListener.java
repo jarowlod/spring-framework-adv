@@ -6,8 +6,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 
-import static pl.training.chat.WebSocketUtils.getNativeHeader;
-import static pl.training.chat.WebSocketUtils.getSocketId;
+import static pl.training.chat.WebSocketUtils.*;
 
 @Component
 @Log
@@ -19,9 +18,11 @@ public class WebSocketConnectedListener implements ApplicationListener<SessionCo
 
     @Override
     public void onApplicationEvent(SessionConnectedEvent event) {
-        var user = getNativeHeader(event, USER_HEADER);
-        log.info("Socket with socket id %s connected (user: %s): ".formatted(getSocketId(event), user));
-        systemMessageSender.send("User %s is now connected".formatted(user));
+        var socketId = getSocketId(event);
+        var username = getNativeHeader(event, USER_HEADER);
+        getNativeAttributes(event).put(socketId, username);
+        log.info("Socket with socket id %s connected (user: %s): ".formatted(socketId, username));
+        systemMessageSender.send("User %s is now connected".formatted(username));
     }
 
 }

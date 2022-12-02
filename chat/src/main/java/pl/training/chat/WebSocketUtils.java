@@ -18,13 +18,22 @@ public class WebSocketUtils {
         return stompHeaderAccessor(event).getSessionAttributes();
     }
 
+    public static Map<String, Object> getNativeAttributes(AbstractSubProtocolEvent event) {
+        var simpConnectMessage = getStompMessage(event);
+        return StompHeaderAccessor.wrap(simpConnectMessage).getSessionAttributes();
+    }
+
     public static String getNativeHeader(AbstractSubProtocolEvent event, String headerName) {
-        var simpConnectMessage = (Message<?>) stompHeaderAccessor(event).getHeader(SIMP_CONNECT_MESSAGE_HEADER);
+        var simpConnectMessage = getStompMessage(event);
         return StompHeaderAccessor.wrap(simpConnectMessage).getFirstNativeHeader(headerName);
     }
 
     private static StompHeaderAccessor stompHeaderAccessor(AbstractSubProtocolEvent event) {
         return StompHeaderAccessor.wrap(event.getMessage());
+    }
+
+    private static Message<?> getStompMessage(AbstractSubProtocolEvent event) {
+        return (Message<?>) stompHeaderAccessor(event).getHeader(SIMP_CONNECT_MESSAGE_HEADER);
     }
 
 }
