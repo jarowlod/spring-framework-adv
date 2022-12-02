@@ -29,6 +29,7 @@ public class ChatController {
 
         var responseChatMessageDto = chatMessageDto.withTimestamp(timeProvider.getTime());
         log.info("New message "+ responseChatMessageDto);
+        log.info("Current controller thread: " + Thread.currentThread().getName());
         chatEventEmitter.emit(responseChatMessageDto);
         if (chatMessageDto.isForALl()) {
             messagingTemplate.convertAndSend(MAIN_ROOM, responseChatMessageDto);
