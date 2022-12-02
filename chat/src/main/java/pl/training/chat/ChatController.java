@@ -5,7 +5,6 @@ import lombok.extern.java.Log;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -20,6 +19,7 @@ public class ChatController {
 
     private final TimeProvider timeProvider;
     private final SimpMessagingTemplate messagingTemplate;
+    private final ChatEventEmitter chatEventEmitter;
 
     @MessageMapping("/chat")
     public void onMessage(@Payload ChatMessageDto chatMessageDto, @Header("simpSessionId") String simpSessionId, SimpMessageHeaderAccessor simpMessageHeaderAccessor) {
@@ -29,6 +29,7 @@ public class ChatController {
 
         var responseChatMessageDto = chatMessageDto.withTimestamp(timeProvider.getTime());
         log.info("New message "+ responseChatMessageDto);
+        chatEventEmitter.emit(responseChatMessageDto);
         if (chatMessageDto.isForALl()) {
             messagingTemplate.convertAndSend(MAIN_ROOM, responseChatMessageDto);
         } else {

@@ -1,20 +1,20 @@
 package pl.training.chat;
 
-import lombok.Builder;
-import lombok.Value;
-import lombok.With;
+import lombok.*;
 
 import java.util.Set;
 
 @Builder
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChatMessageDto {
 
-    String sender;
-    Set<String> recipients;
-    String text;
+    private String sender;
+    private Set<String> recipients;
+    private String text;
     @With
-    String timestamp;
+    private String timestamp;
 
     public boolean isForALl() {
         if (recipients == null) {
