@@ -14,7 +14,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-@EnableCaching
+@EnableCaching(order = 100_000)
 @EnableAsync
 @EnableScheduling
 @EnableWebSocketMessageBroker
