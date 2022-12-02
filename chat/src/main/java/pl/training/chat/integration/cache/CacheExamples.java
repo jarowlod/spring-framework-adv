@@ -20,7 +20,7 @@ public class CacheExamples implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.info("First attempt: " + calculator.add(1, 2));
-        calculator.updateResult("add12");
+        //calculator.updateResult("add12");
         log.info("Second attempt: " + calculator.add(1, 2));
         //calculator.reset("add12");
         Optional.ofNullable(cacheManager.getCache("results")).ifPresent(cache -> {
