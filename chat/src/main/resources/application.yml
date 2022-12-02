@@ -11,6 +11,12 @@ spring:
       group-id: chat
       properties:
         spring.json.trusted.packages: pl.training.chat
+  artemis:
+    broker-url: tcp://localhost:61616 #default
+  jms:
+    listener:
+      concurrency: 10
+    pub-sub-domain: true # topic
 settings:
   default-topic: messages
 
